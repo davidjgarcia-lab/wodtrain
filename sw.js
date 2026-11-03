@@ -1,9 +1,9 @@
 // WODTRAIN service worker: offline app shell. Data lives in localStorage, not here.
-const CACHE = 'wodtrain-netlify-1';
+const CACHE = 'wodtrain-netlify-2';
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE).then((c) => c.addAll(['./', './index.html', './manifest.webmanifest', './icon.svg', './icon-mini.svg', './icon-192.png', './icon-512.png', './apple-touch-icon.png', './install.js', ...["./assets/app-XN5CBGC3.js","./assets/Inter-Regular-P7PJ4J2Z.woff","./assets/Inter-Medium-SG22KBJG.woff","./assets/Inter-SemiBold-OC62LRAJ.woff","./assets/Inter-Bold-NDAUGL3P.woff","./assets/Inter-ExtraBold-JNMWWQNZ.woff","./assets/app-PDSLGEWI.css","./assets/ArchivoExpanded-var.woff2"]])),
+    caches.open(CACHE).then((c) => c.addAll(['./', './index.html', './manifest.webmanifest', './icon.svg', './icon-mini.svg', './icon-192.png', './icon-512.png', './apple-touch-icon.png', './install.js', './guard.js', ...["./assets/app-XN5CBGC3.js","./assets/Inter-Regular-P7PJ4J2Z.woff","./assets/Inter-Medium-SG22KBJG.woff","./assets/Inter-SemiBold-OC62LRAJ.woff","./assets/Inter-Bold-NDAUGL3P.woff","./assets/Inter-ExtraBold-JNMWWQNZ.woff","./assets/app-PDSLGEWI.css","./assets/ArchivoExpanded-var.woff2"]])),
   );
   self.skipWaiting();
 });
