@@ -1,9 +1,9 @@
 // WODTRAIN service worker: offline app shell. Data lives in localStorage, not here.
-const CACHE = 'wod-nexa-1.5.0-1793354679281';
+const CACHE = 'wodtrain-netlify-1';
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE).then((c) => c.addAll(['./', './index.html', './manifest.webmanifest', './icon.svg', './icon-mini.svg', './icon-192.png', './icon-512.png', './apple-touch-icon.png', ...["./assets/app-A6BSVCF3.js","./assets/Inter-Regular-P7PJ4J2Z.woff","./assets/Inter-Medium-SG22KBJG.woff","./assets/Inter-SemiBold-OC62LRAJ.woff","./assets/Inter-Bold-NDAUGL3P.woff","./assets/Inter-ExtraBold-JNMWWQNZ.woff","./assets/ArchivoExpanded-Light-TZLH4G33.woff","./assets/ArchivoExpanded-Bold-RBR5DLLD.woff","./assets/ArchivoExpanded-Black-RRBVZTXQ.woff","./assets/app-LTHDERBD.css"]])),
+    caches.open(CACHE).then((c) => c.addAll(['./', './index.html', './manifest.webmanifest', './icon.svg', './icon-mini.svg', './icon-192.png', './icon-512.png', './apple-touch-icon.png', './install.js', ...["./assets/app-XN5CBGC3.js","./assets/Inter-Regular-P7PJ4J2Z.woff","./assets/Inter-Medium-SG22KBJG.woff","./assets/Inter-SemiBold-OC62LRAJ.woff","./assets/Inter-Bold-NDAUGL3P.woff","./assets/Inter-ExtraBold-JNMWWQNZ.woff","./assets/app-PDSLGEWI.css","./assets/ArchivoExpanded-var.woff2"]])),
   );
   self.skipWaiting();
 });
@@ -17,10 +17,7 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', (event) => {
   const req = event.request;
-  const url = new URL(req.url);
-  if (req.method !== 'GET' || url.origin !== self.location.origin) return;
-  // Never from the cache: the version check and the Android app download must always be current.
-  if (url.pathname.endsWith('/version.json') || url.pathname.includes('/descargas/')) return;
+  if (req.method !== 'GET' || new URL(req.url).origin !== self.location.origin) return;
   // Network first for navigations (fresh app), cache first for hashed assets.
   if (req.mode === 'navigate') {
     event.respondWith(
